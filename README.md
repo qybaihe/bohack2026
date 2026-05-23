@@ -9,6 +9,7 @@
 - `time-chess-react/public/audio/`：北京篇本地 BGM
 - `docs/`：资产规划、玩法交接、ImageGen prompt 与下一线程执行提示
 - `design/reference-screens/`：产品与视觉参考图
+- `source-assets/cards/`：北京 41 张卡牌的原始素材 zip 归档
 - `outputs/`：阶段性游戏文档交付物
 
 ## 当前完成进度
