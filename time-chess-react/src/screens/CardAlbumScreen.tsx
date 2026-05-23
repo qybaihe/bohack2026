@@ -11,6 +11,7 @@ import {
   getGameCardsByCategory,
   playableCardCategories,
 } from '../data/gameCards'
+import { playUiSound } from '../utils/sound'
 
 export function CardAlbumScreen({
   collectedCardIds,
@@ -53,7 +54,10 @@ export function CardAlbumScreen({
                         className={`${selectedCard.id === card.id ? 'selected' : ''} ${cardEarned ? 'earned' : ''}`}
                         key={card.id}
                         type="button"
-                        onClick={() => onSelectCard(card.id)}
+                        onClick={() => {
+                          playUiSound(cardEarned ? 'cardFlip' : 'locked')
+                          onSelectCard(card.id)
+                        }}
                         style={{ '--card-color': card.color } as CSSProperties}
                       >
                         <GameCardArt card={card}>

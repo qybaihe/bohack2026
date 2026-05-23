@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { GameShell } from './components/GameShell'
 import {
@@ -19,7 +19,7 @@ import { PhotoTriggerScreen } from './screens/PhotoTriggerScreen'
 import { SetupScreen } from './screens/SetupScreen'
 import { TheaterScreen } from './screens/TheaterScreen'
 import type { ElementMap, PhotoMap, Preferences, Screen } from './types'
-import { playUiSound } from './utils/sound'
+import { playUiSound, preloadUiSounds } from './utils/sound'
 
 const defaultPreferences = preferenceQuestions.reduce((acc, question) => {
   acc[question.key] = question.options[0].value
@@ -44,8 +44,20 @@ function App() {
   const progress = screen === 'finale' ? 1 : completedNodeIds.length / routeNodes.length
   const storyTitle = createStoryTitle(collectedCardIds)
 
+  useEffect(() => {
+    preloadUiSounds()
+  }, [])
+
   const navigate = (nextScreen: Screen) => {
-    playUiSound('nav')
+    if (nextScreen === 'album') {
+      playUiSound('cardFlip')
+    } else if (nextScreen === 'theater') {
+      playUiSound('theater')
+    } else if (nextScreen === 'finale') {
+      playUiSound('finale')
+    } else {
+      playUiSound('nav')
+    }
     setScreen(nextScreen)
   }
 
@@ -74,7 +86,8 @@ function App() {
   }
 
   const completeMission = () => {
-    playUiSound('reward')
+    playUiSound('mission')
+    window.setTimeout(() => playUiSound('cardUnlock'), 180)
     const nodeElements = selectedElements[currentNode.id] ?? []
     const rewardIds = [...currentNode.rewardCardIds]
 
@@ -98,7 +111,6 @@ function App() {
   }
 
   const openCardAlbum = (cardId: string) => {
-    playUiSound('select')
     setSelectedCardId(cardId)
     setScreen('album')
   }
@@ -140,9 +152,10 @@ function App() {
           selectedElements={selectedElements[currentNode.id] ?? []}
           photoName={photoNames[currentNode.id]}
           onBack={() => navigate('board')}
-          onPhoto={(fileName) =>
+          onPhoto={(fileName) => {
+            playUiSound('cardDraw')
             setPhotoNames((current) => ({ ...current, [currentNode.id]: fileName }))
-          }
+          }}
           onSelectElement={(element) => selectElement(currentNode.id, element)}
           onRoll={rollDice}
         />

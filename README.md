@@ -22,6 +22,7 @@
 5. 已接入完整 41 张透明 PNG 游戏卡牌，位于 `time-chess-react/public/assets/beijing/deck/`。
 6. 已新增 `src/data/gameCards.ts`，把卡牌拆成 6 类：文化核心卡、事件卡、旅程成就卡、观察线索卡、功能兜底卡、剧场角色卡。
 7. 已把旧 7 张文化卡逻辑升级为完整卡牌系统，卡册支持 41 张分组展示，地点奖励也从单卡扩展成地点牌组。
+8. 已补齐首批真实交互音效，覆盖导航、选择、掷骰、抽牌、翻牌、奖励、锁定、剧场、任务完成和终局。
 
 ## 本地启动
 
@@ -66,6 +67,7 @@ npm run lint
 - `time-chess-react/src/components/GameCardArt.tsx`：透明 PNG 卡牌渲染组件
 - `time-chess-react/src/components/CardHand.tsx`：手牌与奖励牌展示
 - `time-chess-react/src/screens/CardAlbumScreen.tsx`：41 张卡牌册
+- `time-chess-react/public/audio/sfx/`：商用可用 CC0 交互音效与许可证说明
 - `docs/BEIJING_CARD_SYSTEM_NEXT_THREAD_PROMPT.md`：下一阶段体验升级交接提示词
 
 ## 下一步建议

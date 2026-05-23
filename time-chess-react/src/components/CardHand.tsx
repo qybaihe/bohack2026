@@ -7,6 +7,7 @@ import {
   getGameCard,
   getGameCards,
 } from '../data/gameCards'
+import { playUiSound } from '../utils/sound'
 import { GameCardArt } from './GameCardArt'
 
 export function CardHand({
@@ -33,7 +34,10 @@ export function CardHand({
             className={earned ? 'hand-card earned' : 'hand-card'}
             key={card.id}
             type="button"
-            onClick={() => onSelect?.(card.id)}
+            onClick={() => {
+              playUiSound(earned ? 'cardFlip' : 'locked')
+              onSelect?.(card.id)
+            }}
             style={{ '--card-color': card.color } as CSSProperties}
           >
             <GameCardArt card={card} locked={!earned}>
