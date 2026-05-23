@@ -1,0 +1,22 @@
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Local test and browser artifacts
+.playwright-cli/
+output/playwright/
+time-chess-react/check*.png
+*.log
+
+# Temporary working folders
+tmp/
+tmp_card_review/
+
+# Local environment files
+.env
+.env.*
